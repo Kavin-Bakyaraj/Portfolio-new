@@ -171,7 +171,7 @@ const Certifications: React.FC = () => {
 
   return (
     <section id="certifications" className="relative py-24 min-h-screen overflow-hidden">
-      <Boxes />
+      <Boxes className="z-0" />
       <div className="relative z-10 container mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
           Certifications

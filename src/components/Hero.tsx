@@ -126,7 +126,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <Boxes />
+      <Boxes className="z-0" />
       {/* Particle background */}
       <canvas
         ref={canvasRef}
@@ -147,7 +147,6 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
         }}
         className="absolute top-20 left-20 w-20 h-20 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-xl"
       />
-      
       <motion.div
         animate={{
           y: [20, -20, 20],

@@ -61,8 +61,8 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="about" ref={ref} className="py-20 relative overflow-hidden">
-      <Boxes />
-      <div className="container mx-auto px-6">
+      <Boxes className="z-0" />
+      <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
