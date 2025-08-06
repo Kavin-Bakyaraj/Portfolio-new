@@ -112,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
             <div className="flex items-center space-x-3">
               {/* Resume download */}
               <motion.a
-                href="public/Ats Resume.pdf"
+                href="/Ats Resume.pdf"
                 download
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -128,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
           <div className="lg:hidden flex items-center space-x-3">
             {/* Mobile Resume Button */}
             <motion.a
-              href="public/Ats Resume.pdf"
+              href="/Ats Resume.pdf"
               download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -196,7 +196,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
                 ))}
                 
                 <motion.a
-                  href="/KAVIN B ATS Resume.pdf"
+                  href="/Ats Resume.pdf"
                   download
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}

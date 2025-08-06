@@ -133,7 +133,11 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0"
-        style={{ background: 'transparent' }}
+        style={{ 
+          background: 'transparent',
+          touchAction: 'none',
+          pointerEvents: 'none'
+        }}
       />
 
       {/* Floating elements */}

@@ -131,7 +131,7 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
                 </div>
                 
                 <motion.a
-                  href="public/Ats Resume.pdf"
+                  href="/Ats Resume.pdf"
                   download
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}

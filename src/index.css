@@ -81,10 +81,28 @@ section {
 @media screen and (max-width: 768px) {
   html {
     -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
   }
   
   body {
     -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+    overscroll-behavior: contain;
+  }
+  
+  /* Allow scrolling on touch devices */
+  * {
+    touch-action: manipulation;
+  }
+  
+  /* Specific touch handling for interactive elements */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+  }
+  
+  /* Allow scrolling for scroll containers */
+  main, section, .scroll-container {
+    touch-action: pan-y;
   }
 }
 

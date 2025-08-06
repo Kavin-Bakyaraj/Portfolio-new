@@ -33,7 +33,7 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden" style={{ touchAction: 'pan-y' }}>
       {/* Loading Screen */}
       <AnimatePresence>
         {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
@@ -44,14 +44,14 @@ function App() {
         <Waves className="w-full h-full" />
       </div>
 
-      <div ref={scrollContainerRef} className="relative z-10">
+      <div ref={scrollContainerRef} className="relative z-10" style={{ touchAction: 'pan-y' }}>
         <TracingBeam className="px-0">
           <Header 
             currentSection={currentSection}
             setCurrentSection={setCurrentSection}
           />
           
-          <main>
+          <main style={{ touchAction: 'pan-y' }}>
             <Hero setCurrentSection={setCurrentSection} />
             <About setCurrentSection={setCurrentSection} />
             <Skills setCurrentSection={setCurrentSection} />
@@ -69,11 +69,31 @@ function App() {
         html {
           scroll-behavior: smooth;
           overflow-x: hidden;
+          touch-action: manipulation;
         }
         
         body {
           overflow-x: hidden;
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          touch-action: manipulation;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+        }
+        
+        /* Ensure scrolling works on mobile */
+        @media (max-width: 768px) {
+          * {
+            touch-action: manipulation;
+          }
+          
+          main, section {
+            touch-action: pan-y;
+          }
+          
+          canvas {
+            pointer-events: none !important;
+            touch-action: none !important;
+          }
         }
         
         /* Custom scrollbar */
