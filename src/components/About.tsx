@@ -70,12 +70,12 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
           className="max-w-7xl mx-auto"
         >
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white px-4"
             >
               About Me
             </motion.h2>
@@ -88,18 +88,18 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
             />
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12 md:mb-16">
             {/* Professional Summary */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.6 }}
-              className="space-y-8"
+              className="space-y-6 md:space-y-8"
             >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500">
-                <h3 className="text-2xl font-bold text-white mb-6">Professional Summary</h3>
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-all duration-500">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Professional Summary</h3>
                 
-                <div className="space-y-4 text-white/80 leading-relaxed">
+                <div className="space-y-3 md:space-y-4 text-white/80 leading-relaxed text-sm md:text-base">
                   <p>
                     AI & Data Science enthusiast with hands-on skills in prompt engineering, Python, SQL, and full stack development. 
                     Experienced in building scalable applications and intelligent AI workflows using tools like Langchain, Gemini API, and n8n.
@@ -112,7 +112,7 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
                 </div>
 
                 {/* Achievements Grid */}
-                <div className="grid grid-cols-2 gap-4 mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-6 md:mt-8">
                   {achievements.map((achievement, index) => (
                     <motion.div
                       key={index}
@@ -120,12 +120,12 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ delay: 0.8 + index * 0.1 }}
                       whileHover={{ scale: 1.05 }}
-                      className="flex items-center space-x-2 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
+                      className="flex items-center space-x-2 p-2 md:p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300"
                     >
-                      <div className="text-blue-400">
+                      <div className="text-blue-400 flex-shrink-0">
                         {achievement.icon}
                       </div>
-                      <span className="text-sm text-white/70">{achievement.text}</span>
+                      <span className="text-xs md:text-sm text-white/70">{achievement.text}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -138,9 +138,9 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
                   transition={{ delay: 1.2 }}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 mt-8"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 mt-6 md:mt-8 text-sm md:text-base"
                 >
-                  <Download size={20} />
+                  <Download size={18} className="md:w-5 md:h-5" />
                   <span>Download Resume</span>
                 </motion.a>
               </div>
@@ -151,12 +151,12 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.8 }}
-              className="space-y-8"
+              className="space-y-6 md:space-y-8"
             >
               {/* Areas of Interest */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500">
-                <h4 className="text-xl font-semibold text-white mb-6">Areas of Interest</h4>
-                <div className="flex flex-wrap gap-3">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-all duration-500">
+                <h4 className="text-lg md:text-xl font-semibold text-white mb-4 md:mb-6">Areas of Interest</h4>
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {interests.map((interest, index) => (
                     <motion.span
                       key={interest}
@@ -164,7 +164,7 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ delay: 1 + index * 0.1 }}
                       whileHover={{ scale: 1.05 }}
-                      className="px-4 py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-white text-sm rounded-full hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300"
+                      className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-white text-xs md:text-sm rounded-full hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300"
                     >
                       {interest}
                     </motion.span>

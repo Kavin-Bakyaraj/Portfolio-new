@@ -143,9 +143,9 @@ const Contact: React.FC<ContactProps> = ({ setCurrentSection }) => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-20 relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-16 md:py-20 relative overflow-hidden">
       {/* Waves background is now global */}
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -153,12 +153,12 @@ const Contact: React.FC<ContactProps> = ({ setCurrentSection }) => {
           className="max-w-7xl mx-auto"
         >
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white px-4"
             >
               Let's Connect
             </motion.h2>
@@ -167,20 +167,20 @@ const Contact: React.FC<ContactProps> = ({ setCurrentSection }) => {
               initial={{ width: 0 }}
               animate={isInView ? { width: 120 } : {}}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"
+              className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-4 md:mb-6"
             />
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6 }}
-              className="text-xl text-white/70 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto px-4"
             >
               Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
             </motion.p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -190,15 +190,15 @@ const Contact: React.FC<ContactProps> = ({ setCurrentSection }) => {
             >
               <animated.div
                 style={formSpring}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500"
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-all duration-500"
               >
-                <h3 className="text-2xl font-bold text-white mb-6">Send me a message</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Send me a message</h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                     {/* Name Field */}
                     <div className="relative">
-                      <Label htmlFor="name" className="mb-2 text-white/80">Name *</Label>
+                      <Label htmlFor="name" className="mb-2 text-white/80 text-sm md:text-base">Name *</Label>
                       <Input
                         id="name"
                         name="name"
@@ -206,12 +206,12 @@ const Contact: React.FC<ContactProps> = ({ setCurrentSection }) => {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className={`bg-white/5 text-white placeholder-white/50 ${errors.name ? 'border-red-500 focus:ring-red-500/20' : 'border-white/20 focus:border-blue-500 focus:ring-blue-500/20'}`}
+                        className={`bg-white/5 text-white placeholder-white/50 text-sm md:text-base h-10 md:h-12 ${errors.name ? 'border-red-500 focus:ring-red-500/20' : 'border-white/20 focus:border-blue-500 focus:ring-blue-500/20'}`}
                         placeholder="Your name"
                       />
                       {errors.name && (
-                        <div className="flex items-center space-x-1 text-red-400 text-sm mt-1">
-                          <AlertCircle size={14} />
+                        <div className="flex items-center space-x-1 text-red-400 text-xs md:text-sm mt-1">
+                          <AlertCircle size={12} className="md:w-3.5 md:h-3.5" />
                           <span>{errors.name}</span>
                         </div>
                       )}

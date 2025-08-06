@@ -179,15 +179,15 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
               stiffness: 200,
               damping: 15
             }}
-            className="mb-12 mt-24 md:mt-32 relative"
+            className="mb-8 md:mb-12 mt-16 sm:mt-20 md:mt-24 lg:mt-32 relative"
           >
-            <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 mx-auto relative flex items-center justify-center">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 mx-auto relative flex items-center justify-center">
               <div className="absolute inset-0 rounded-full pointer-events-none z-10 animate-glow-border" />
               <div className="w-full h-full flex items-center justify-center relative z-20">
                 <img 
                   src="/WhatsApp Image 2025-07-07 at 14.25.56_574ece33.jpg" 
                   alt="Kavin B - Profile Picture"
-                  className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full object-cover border-4 border-white shadow-xl bg-black"
+                  className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 xl:w-52 xl:h-52 rounded-full object-cover border-4 border-white shadow-xl bg-black"
                 />
               </div>
             </div>
@@ -199,13 +199,13 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 md:mb-6 text-white leading-tight px-2 sm:px-4">
               Hi, I'm{' '}
               <motion.span
                 initial={{ backgroundPosition: "0% 50%" }}
                 animate={{ backgroundPosition: "100% 50%" }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="bg-gradient-to-r from-blue-400 via-purple-500 via-pink-500 to-blue-400 bg-clip-text text-transparent bg-[length:200%_100%]"
+                className="bg-gradient-to-r from-blue-400 via-purple-500 via-pink-500 to-blue-400 bg-clip-text text-transparent bg-[length:200%_100%] block sm:inline"
               >
                 Kavin B
               </motion.span>
@@ -217,15 +217,16 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-xl md:text-3xl mb-8 text-white/80 font-light"
+            className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-6 md:mb-8 text-white/80 font-light px-2 sm:px-4"
           >
             <motion.span
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ delay: 1.2, duration: 2, ease: "easeInOut" }}
-              className="inline-block overflow-hidden whitespace-nowrap border-r-2 border-blue-500"
+              className="inline-block overflow-hidden border-r-2 border-blue-500"
             >
-              AI & Data Science Enthusiast | Full Stack Developer
+              <span className="hidden md:inline whitespace-nowrap">AI & Data Science Enthusiast | Full Stack Developer</span>
+              <span className="md:hidden whitespace-nowrap">AI & Full Stack Developer</span>
             </motion.span>
           </motion.div>
 
@@ -234,10 +235,10 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
-            className="text-lg mb-12 max-w-2xl mx-auto text-white/70 leading-relaxed"
+            className="text-xs sm:text-sm md:text-base lg:text-lg mb-6 md:mb-8 lg:mb-12 max-w-2xl mx-auto text-white/70 leading-relaxed px-2 sm:px-4"
           >
-            Passionate about building intelligent AI workflows and scalable applications. 
-            Currently contributing to LLM-based automation systems at SNS iHub.
+            <span className="block sm:inline">Passionate about building intelligent AI workflows and scalable applications.</span>
+            <span className="hidden lg:inline"> Currently contributing to LLM-based automation systems at SNS iHub.</span>
           </motion.p>
 
           {/* Stats */}
@@ -245,25 +246,25 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6, duration: 0.8 }}
-            className="grid grid-cols-3 gap-8 mb-12 max-w-md mx-auto"
+            className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8 lg:mb-12 max-w-xs sm:max-w-sm md:max-w-md mx-auto px-2 sm:px-4"
           >
             <div className="text-center">
-              <animated.div className="text-3xl font-bold text-white mb-2">
+              <animated.div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2">
                 {statsAnimation.projects.to(n => `${Math.floor(n)}+`)}
               </animated.div>
-              <div className="text-white/60 text-sm">Projects</div>
+              <div className="text-white/60 text-xs sm:text-sm">Projects</div>
             </div>
             <div className="text-center">
-              <animated.div className="text-3xl font-bold text-white mb-2">
+              <animated.div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2">
                 {statsAnimation.experience.to(n => `${Math.floor(n)}+`)}
               </animated.div>
-              <div className="text-white/60 text-sm">Years Experience</div>
+              <div className="text-white/60 text-xs sm:text-sm">Years<span className="hidden sm:inline"> Experience</span></div>
             </div>
             <div className="text-center">
-              <animated.div className="text-3xl font-bold text-white mb-2">
+              <animated.div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 md:mb-2">
                 {statsAnimation.skills.to(n => `${Math.floor(n)}+`)}
               </animated.div>
-              <div className="text-white/60 text-sm">Skills</div>
+              <div className="text-white/60 text-xs sm:text-sm">Skills</div>
             </div>
           </motion.div>
 
@@ -272,12 +273,12 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.8, duration: 0.8 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
+            className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-6 md:mb-8 lg:mb-12 px-2 sm:px-4"
           >
             {socialLinks.map((social, index) => (
               social.preview ? (
-                <LinkPreview url={social.href} key={social.label} className="flex items-center space-x-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-300 font-medium">
-                  <span className="mr-2">{social.icon}</span>
+                <LinkPreview url={social.href} key={social.label} className="flex items-center justify-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-300 font-medium text-xs sm:text-sm md:text-base">
+                  <span className="mr-1 sm:mr-2">{social.icon}</span>
                   {social.label}
                 </LinkPreview>
               ) : (
@@ -293,7 +294,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
                     boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center space-x-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-300"
+                  className="flex items-center justify-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-300 text-xs sm:text-sm md:text-base"
                 >
                   {social.icon}
                   <span className="font-medium">{social.label}</span>
@@ -307,9 +308,9 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.4, duration: 0.8 }}
-            className="flex items-center justify-center space-x-2 text-white/60 mb-16"
+            className="flex items-center justify-center space-x-2 text-white/60 mb-12 md:mb-16 text-sm sm:text-base px-4"
           >
-            <MapPin size={16} />
+            <MapPin size={14} className="sm:w-4 sm:h-4" />
             <span>Coimbatore, India</span>
           </motion.div>
         </motion.div>

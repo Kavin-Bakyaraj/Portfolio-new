@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   motion,
   useTransform,
@@ -38,8 +38,8 @@ export const AnimatedTooltip = ({
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-6">
-      {items.map((item, idx) => (
+    <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 px-4 py-4">
+      {items.map((item) => (
         <div
           className="group relative"
           key={item.name}
@@ -83,9 +83,9 @@ export const AnimatedTooltip = ({
             width={80}
             src={item.image}
             alt={item.name}
-            whileHover={{ scale: 1.1, y: -5 }}
+            whileHover={{ scale: 1.15, y: -8 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="relative !m-0 h-16 w-16 md:h-20 md:w-20 rounded-xl border-2 border-white/20 object-cover object-center !p-2 bg-white/5 backdrop-blur-sm transition duration-500 group-hover:z-30 group-hover:border-blue-400 group-hover:shadow-lg group-hover:shadow-blue-500/25"
+            className="relative !m-0 h-16 w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 rounded-xl border-2 border-white/20 object-cover object-center !p-2 md:!p-3 bg-white/10 backdrop-blur-sm transition-all duration-500 group-hover:z-30 group-hover:border-blue-400 group-hover:shadow-xl group-hover:shadow-blue-500/30 group-hover:bg-white/20"
           />
         </div>
       ))}

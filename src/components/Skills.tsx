@@ -80,12 +80,12 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
           className="max-w-7xl mx-auto"
         >
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white px-4"
             >
               Skills & Expertise
             </motion.h2>
@@ -94,14 +94,14 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
               initial={{ width: 0 }}
               animate={isInView ? { width: 120 } : {}}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6 shadow-lg shadow-blue-500/50"
+              className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-4 md:mb-6 shadow-lg shadow-blue-500/50"
             />
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-xl text-white/70 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto px-4"
             >
               Technologies and tools I work with to bring ideas to life
             </motion.p>
@@ -112,7 +112,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="flex justify-center items-center gap-8 mb-16"
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16 px-4"
           >
             {achievements.map((achievement, index) => (
               <motion.div
@@ -121,14 +121,14 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
                 whileHover={{ scale: 1.02 }}
-                className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-200 shadow-xl ${achievement.glow} w-64 h-32 flex flex-col items-center justify-center`}
+                className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 md:p-6 text-center hover:bg-white/10 transition-all duration-200 shadow-xl ${achievement.glow} w-full sm:w-56 md:w-64 h-24 sm:h-28 md:h-32 flex flex-col items-center justify-center`}
               >
-                <div className={`text-white mb-3 flex justify-center p-2 rounded-lg bg-gradient-to-r ${achievement.color}`}>
+                <div className={`text-white mb-2 md:mb-3 flex justify-center p-1.5 md:p-2 rounded-lg bg-gradient-to-r ${achievement.color}`}>
                   {achievement.icon}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-1">{achievement.title}</h3>
-                  <p className="text-white/60 text-sm">{achievement.subtitle}</p>
+                  <h3 className="text-base md:text-lg font-semibold text-white mb-1">{achievement.title}</h3>
+                  <p className="text-white/60 text-xs md:text-sm">{achievement.subtitle}</p>
                 </div>
               </motion.div>
             ))}
@@ -139,20 +139,20 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="space-y-12"
+            className="space-y-16 md:space-y-20"
           >
             {/* Frontend Skills */}
-            <div className="text-center">
+            <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mx-4 hover:bg-white/10 transition-all duration-300">
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.7, duration: 0.4 }}
-                className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
+                className="text-2xl sm:text-3xl font-bold text-white mb-8 md:mb-10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3"
               >
-                <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg">
-                  <Code size={24} />
+                <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/30">
+                  <Code size={20} className="sm:w-6 sm:h-6" />
                 </div>
-                Frontend Development
+                <span className="text-xl sm:text-2xl md:text-3xl">Frontend Development</span>
               </motion.h3>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -164,17 +164,17 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             </div>
 
             {/* Backend Skills */}
-            <div className="text-center">
+            <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mx-4 hover:bg-white/10 transition-all duration-300">
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.9, duration: 0.4 }}
-                className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
+                className="text-2xl sm:text-3xl font-bold text-white mb-8 md:mb-10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3"
               >
-                <div className="p-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg">
-                  <Database size={24} />
+                <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg shadow-green-500/30">
+                  <Database size={20} className="sm:w-6 sm:h-6" />
                 </div>
-                Backend Development
+                <span className="text-xl sm:text-2xl md:text-3xl">Backend Development</span>
               </motion.h3>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -186,17 +186,17 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             </div>
 
             {/* AI & ML Skills */}
-            <div className="text-center">
+            <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mx-4 hover:bg-white/10 transition-all duration-300">
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1.1, duration: 0.4 }}
-                className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
+                className="text-2xl sm:text-3xl font-bold text-white mb-8 md:mb-10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3"
               >
-                <div className="p-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg">
-                  <Brain size={24} />
+                <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/30">
+                  <Brain size={20} className="sm:w-6 sm:h-6" />
                 </div>
-                AI & Machine Learning
+                <span className="text-xl sm:text-2xl md:text-3xl">AI & Machine Learning</span>
               </motion.h3>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -208,17 +208,17 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             </div>
 
             {/* Tools & Technologies */}
-            <div className="text-center">
+            <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mx-4 hover:bg-white/10 transition-all duration-300">
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1.3, duration: 0.4 }}
-                className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
+                className="text-2xl sm:text-3xl font-bold text-white mb-8 md:mb-10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3"
               >
-                <div className="p-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg">
-                  <Zap size={24} />
+                <div className="p-2 sm:p-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg shadow-orange-500/30">
+                  <Zap size={20} className="sm:w-6 sm:h-6" />
                 </div>
-                Tools & Technologies
+                <span className="text-xl sm:text-2xl md:text-3xl">Tools & Technologies</span>
               </motion.h3>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}

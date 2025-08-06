@@ -174,9 +174,9 @@ const Projects: React.FC<ProjectsProps> = ({ setCurrentSection }) => {
   };
 
   return (
-    <section id="projects" ref={ref} className="py-20 relative overflow-hidden">
+    <section id="projects" ref={ref} className="py-16 md:py-20 relative overflow-hidden">
       {/* Waves background is now global */}
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -184,12 +184,12 @@ const Projects: React.FC<ProjectsProps> = ({ setCurrentSection }) => {
           className="max-w-7xl mx-auto"
         >
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-6xl font-bold mb-6 text-white"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-white px-4"
             >
               Featured Projects
             </motion.h2>
@@ -198,14 +198,14 @@ const Projects: React.FC<ProjectsProps> = ({ setCurrentSection }) => {
               initial={{ width: 0 }}
               animate={isInView ? { width: 120 } : {}}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"
+              className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-4 md:mb-6"
             />
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6 }}
-              className="text-xl text-white/70 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto px-4"
             >
               A showcase of my latest work in AI, full-stack development, and innovative solutions
             </motion.p>
@@ -216,7 +216,7 @@ const Projects: React.FC<ProjectsProps> = ({ setCurrentSection }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.8 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12 px-4"
           >
             {categories.map((category, index) => (
               <motion.button
@@ -227,13 +227,13 @@ const Projects: React.FC<ProjectsProps> = ({ setCurrentSection }) => {
                 transition={{ delay: 1 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                className={`flex items-center space-x-1.5 sm:space-x-2 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base ${
                   activeFilter === category
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25'
                     : 'bg-white/5 backdrop-blur-sm border border-white/10 text-white/70 hover:bg-white/10 hover:text-white'
                 }`}
               >
-                {getCategoryIcon(category)}
+                <span className="flex-shrink-0">{getCategoryIcon(category)}</span>
                 <span>{category}</span>
               </motion.button>
             ))}
