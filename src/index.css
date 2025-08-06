@@ -47,7 +47,7 @@ html, body {
   overflow-x: hidden !important;
   height: auto !important;
   scroll-behavior: smooth !important;
-  touch-action: auto !important;
+  touch-action: pan-y !important;
   -webkit-overflow-scrolling: touch !important;
 }
 
@@ -55,28 +55,49 @@ html, body {
   overflow-y: auto !important;
   height: auto !important;
   min-height: 100vh !important;
+  touch-action: pan-y !important;
 }
 
-/* Remove ALL potential scroll blockers */
+/* Allow vertical scrolling everywhere */
 *, *::before, *::after {
-  touch-action: auto !important;
+  touch-action: pan-y !important;
 }
 
-/* Make sure interactive elements work */
+/* Make sure interactive elements work but allow scrolling */
 button, a, input, textarea, select {
   pointer-events: auto !important;
   touch-action: manipulation !important;
 }
 
-/* Force canvas and animations to not block */
+/* Navigation specific touch handling */
+nav button, nav a, header button, header a {
+  touch-action: manipulation !important;
+  pointer-events: auto !important;
+}
+
+/* Mobile menu specific fixes */
+@media (max-width: 1024px) {
+  .mobile-nav-button {
+    touch-action: manipulation !important;
+    pointer-events: auto !important;
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.3) !important;
+  }
+}
+
+/* Force canvas and animations to not block touch events */
 canvas, svg {
   pointer-events: none !important;
   touch-action: none !important;
 }
 
-/* Remove any fixed positioning that might block */
-.fixed {
-  pointer-events: auto !important;
+/* Header should allow interaction but not block scrolling */
+header, nav {
+  touch-action: pan-y !important;
+}
+
+/* Main content areas should allow vertical panning */
+main, section, div {
+  touch-action: pan-y !important;
 }
 
 /* Remove unwanted mobile selection/focus borders */
@@ -131,32 +152,39 @@ section {
   isolation: isolate;
 }
 
-/* Fix for mobile viewport issues */
+/* Fix for mobile viewport issues - UPDATED */
 @media screen and (max-width: 768px) {
   html {
-    -webkit-text-size-adjust: 100%;
-    touch-action: manipulation;
+    -webkit-text-size-adjust: 100% !important;
+    touch-action: pan-y !important;
   }
   
   body {
-    -webkit-overflow-scrolling: touch;
-    touch-action: manipulation;
-    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
+    overscroll-behavior: contain !important;
+    overflow-y: auto !important;
   }
   
-  /* Allow scrolling on touch devices */
+  /* Allow vertical scrolling on all elements */
   * {
-    touch-action: manipulation;
+    touch-action: pan-y !important;
   }
   
-  /* Specific touch handling for interactive elements */
+  /* Interactive elements can have manipulation but must allow vertical scroll */
   button, a, [role="button"] {
-    touch-action: manipulation;
+    touch-action: manipulation !important;
   }
   
-  /* Allow scrolling for scroll containers */
-  main, section, .scroll-container {
-    touch-action: pan-y;
+  /* Scroll containers must allow vertical panning */
+  main, section, .scroll-container, #root {
+    touch-action: pan-y !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Fix for any problematic containers */
+  .relative, .fixed, .absolute {
+    touch-action: pan-y !important;
   }
 }
 

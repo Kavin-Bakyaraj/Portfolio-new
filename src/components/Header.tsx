@@ -85,24 +85,44 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
     if (element) {
       try {
         const elementTop = element.offsetTop;
-        const headerHeight = 80;
-        const targetPosition = elementTop - headerHeight;
+        const headerHeight = window.innerWidth < 768 ? 70 : 80; // Smaller header height on mobile
+        const targetPosition = Math.max(0, elementTop - headerHeight);
         
         // Update section immediately for instant navbar feedback
         setCurrentSection(sectionId);
         
-        // Smooth scroll to target
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+        // Close mobile menu first
+        setIsMenuOpen(false);
+        
+        // For mobile devices, use a different approach
+        if (window.innerWidth < 768) {
+          // Mobile scroll - more aggressive approach
+          setTimeout(() => {
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }, 100); // Small delay to allow menu to close
+        } else {
+          // Desktop scroll
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
         
       } catch (error) {
-        // Fallback
-        window.location.hash = href;
+        console.log('Scroll error:', error);
+        // Fallback for mobile
+        setIsMenuOpen(false);
+        setTimeout(() => {
+          window.location.hash = href;
+        }, 100);
       }
+    } else {
+      console.log('Element not found:', sectionId);
+      setIsMenuOpen(false);
     }
-    setIsMenuOpen(false);
   };
 
   return (
@@ -196,6 +216,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.1, duration: 0.6 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              style={{ touchAction: 'manipulation' }}
               className="p-2 text-white bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-colors"
             >
               <AnimatePresence mode="wait">
@@ -243,7 +264,8 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => scrollToSection(item.href)}
-                    className={`block w-full text-left px-6 py-3 transition-all duration-200 ${
+                    style={{ touchAction: 'manipulation' }}
+                    className={`mobile-nav-button block w-full text-left px-6 py-3 transition-all duration-200 ${
                       currentSection === item.href.slice(1)
                         ? 'text-white bg-white/10'
                         : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -259,7 +281,8 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
                   transition={{ delay: navItems.length * 0.1 }}
                   href="/Ats Resume.pdf"
                   download
-                  className="flex items-center space-x-2 mx-6 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
+                  style={{ touchAction: 'manipulation' }}
+                  className="mobile-nav-button flex items-center space-x-2 mx-6 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
                 >
                   <Download size={16} />
                   <span>Download Resume</span>

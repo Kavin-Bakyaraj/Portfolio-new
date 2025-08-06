@@ -110,6 +110,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
       id="home" 
       ref={ref} 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ touchAction: 'pan-y' }}
     >
       {/* Waves background is now global */}
       {/* Particle background - completely non-interactive */}
@@ -118,7 +119,8 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
         className="absolute inset-0 z-0"
         style={{ 
           background: 'transparent',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          touchAction: 'none'
         }}
       />
 
@@ -128,15 +130,17 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.5, duration: 1, type: "spring", stiffness: 100 }}
         className="absolute top-20 left-20 w-20 h-20 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl"
+        style={{ pointerEvents: 'none', touchAction: 'none' }}
       />
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.7, duration: 1, type: "spring", stiffness: 100 }}
         className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-xl"
+        style={{ pointerEvents: 'none', touchAction: 'none' }}
       />
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-6 text-center" style={{ touchAction: 'pan-y' }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: 100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
