@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Download } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 
 interface HeaderProps {
   currentSection: string;
@@ -13,26 +13,60 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScroll = window.scrollY;
+      setScrolled(currentScroll > 50);
       
-      // Update current section based on scroll position
+      // Better section detection
       const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
-      const currentPos = window.scrollY + 100;
+      const currentPos = currentScroll + 150; // Increased offset for better detection
       
+      // Find the section that's most visible
+      let activeSection = 'home';
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
+          const sectionCenter = offsetTop + offsetHeight / 2;
+          
           if (currentPos >= offsetTop && currentPos < offsetTop + offsetHeight) {
-            setCurrentSection(section);
+            activeSection = section;
             break;
+          }
+          // If we're past the section center, it's the active one
+          if (currentPos >= sectionCenter && currentPos < sectionCenter + offsetHeight) {
+            activeSection = section;
           }
         }
       }
+      
+      // Only update if different to prevent unnecessary re-renders
+      if (activeSection !== currentSection) {
+        setCurrentSection(activeSection);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [setCurrentSection, currentSection]);
+
+  // Handle page load animations and scroll to top
+  useEffect(() => {
+    // Remove any hash from URL and scroll to top on page load
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+    
+    // Scroll to top on page load/reload
+    window.scrollTo(0, 0);
+    setCurrentSection('home');
+    
+    // Additional scroll to top after a delay
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
   }, [setCurrentSection]);
 
   const navItems = [
@@ -45,9 +79,28 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+    const sectionId = href.replace('#', '');
+    const element = document.getElementById(sectionId);
+    
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      try {
+        const elementTop = element.offsetTop;
+        const headerHeight = 80;
+        const targetPosition = elementTop - headerHeight;
+        
+        // Update section immediately for instant navbar feedback
+        setCurrentSection(sectionId);
+        
+        // Smooth scroll to target
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+      } catch (error) {
+        // Fallback
+        window.location.hash = href;
+      }
     }
     setIsMenuOpen(false);
   };
@@ -57,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? 'backdrop-blur-md bg-black/40 border-b border-white/20 shadow-2xl'
           : 'bg-black/20 backdrop-blur-sm'
@@ -67,9 +120,10 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="relative cursor-pointer"
           >
             <div className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               KAVIN B
@@ -86,13 +140,11 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
             {navItems.map((item, index) => (
               <motion.button
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 ${
+                transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                onClick={() => scrollToSection(item.href)}
+                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   currentSection === item.href.slice(1)
                     ? 'text-white'
                     : 'text-white/70 hover:text-white'
@@ -112,11 +164,12 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
             <div className="flex items-center space-x-3">
               {/* Resume download */}
               <motion.a
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
                 href="/Ats Resume.pdf"
                 download
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 text-sm"
+                className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-full font-medium hover:opacity-90 transition-opacity duration-200 text-sm"
               >
                 <Download size={14} />
                 <span>Resume</span>
@@ -128,20 +181,22 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
           <div className="lg:hidden flex items-center space-x-3">
             {/* Mobile Resume Button */}
             <motion.a
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
               href="/Ats Resume.pdf"
               download
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full"
+              className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:opacity-90 transition-opacity"
             >
               <Download size={16} />
             </motion.a>
             
             <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 text-white bg-white/10 backdrop-blur-sm rounded-lg border border-white/20"
+              className="p-2 text-white bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-colors"
             >
               <AnimatePresence mode="wait">
                 {isMenuOpen ? (
@@ -184,25 +239,27 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.href}
-                    onClick={() => scrollToSection(item.href)}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 10, backgroundColor: 'rgba(255,255,255,0.1)' }}
-                    className="block w-full text-left px-6 py-3 text-white/80 hover:text-white transition-all duration-200"
+                    onClick={() => scrollToSection(item.href)}
+                    className={`block w-full text-left px-6 py-3 transition-all duration-200 ${
+                      currentSection === item.href.slice(1)
+                        ? 'text-white bg-white/10'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
                   >
                     {item.label}
                   </motion.button>
                 ))}
                 
                 <motion.a
-                  href="/Ats Resume.pdf"
-                  download
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.1 }}
-                  whileHover={{ x: 10 }}
-                  className="flex items-center space-x-2 mx-6 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-full font-medium"
+                  href="/Ats Resume.pdf"
+                  download
+                  className="flex items-center space-x-2 mx-6 mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-full font-medium hover:opacity-90 transition-opacity"
                 >
                   <Download size={16} />
                   <span>Download Resume</span>

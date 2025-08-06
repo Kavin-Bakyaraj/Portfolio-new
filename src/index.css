@@ -41,29 +41,83 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global scroll and layout fixes */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
+/* EMERGENCY SCROLL FIX - Override everything */
+html, body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  scroll-behavior: smooth !important;
+  touch-action: auto !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 #root {
-  min-height: 100vh;
-  position: relative;
-  width: 100%;
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Remove ALL potential scroll blockers */
+*, *::before, *::after {
+  touch-action: auto !important;
+}
+
+/* Make sure interactive elements work */
+button, a, input, textarea, select {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+
+/* Force canvas and animations to not block */
+canvas, svg {
+  pointer-events: none !important;
+  touch-action: none !important;
+}
+
+/* Remove any fixed positioning that might block */
+.fixed {
+  pointer-events: auto !important;
+}
+
+/* Remove unwanted mobile selection/focus borders */
+@media (max-width: 1024px) {
+  * {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  /* Allow text selection only where needed */
+  p, span, div[contenteditable], input, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+  
+  /* Remove focus outline on touch devices */
+  button:focus,
+  a:focus,
+  [role="button"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Remove button pressed states */
+  button:active,
+  a:active,
+  [role="button"]:active {
+    background-color: transparent !important;
+    transform: none !important;
+  }
+}
+
+/* Global scroll and layout fixes */
+* {
+  box-sizing: border-box;
 }
 
 /* Prevent content jumping during animations */

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scroll Test</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        .section { height: 100vh; padding: 50px; border: 2px solid #333; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; background: #333; color: white; padding: 10px; z-index: 100; }
+        .nav button { margin: 5px; padding: 10px; background: #666; color: white; border: none; cursor: pointer; }
+        #section1 { background: #ff9999; }
+        #section2 { background: #99ff99; }
+        #section3 { background: #9999ff; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button onclick="scrollToSection('section1')">Section 1</button>
+        <button onclick="scrollToSection('section2')">Section 2</button>
+        <button onclick="scrollToSection('section3')">Section 3</button>
+        <button onclick="testScroll()">Test Scroll 500px</button>
+    </div>
+    
+    <div id="section1" class="section">
+        <h1>Section 1</h1>
+        <p>This is section 1. Try scrolling or using navigation.</p>
+    </div>
+    
+    <div id="section2" class="section">
+        <h1>Section 2</h1>
+        <p>This is section 2. Navigation should work.</p>
+    </div>
+    
+    <div id="section3" class="section">
+        <h1>Section 3</h1>
+        <p>This is section 3. Test completed.</p>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            console.log('Scrolling to:', id);
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function testScroll() {
+            console.log('Test scroll to 500px');
+            window.scrollTo({ top: 500, behavior: 'smooth' });
+        }
+        
+        // Log scroll events
+        window.addEventListener('scroll', () => {
+            console.log('Scroll position:', window.scrollY);
+        });
+    </script>
+</body>
+</html>
