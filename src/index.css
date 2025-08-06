@@ -17,20 +17,20 @@
 }
 @keyframes glow-border {
   0% {
-    box-shadow: 0 0 24px 8px #6366f1, 0 0 48px 16px #a21caf, 0 0 80px 32px #ec4899;
+    box-shadow: 0 0 24px 8px rgba(255, 255, 255, 0.6), 0 0 48px 16px rgba(255, 255, 255, 0.4), 0 0 80px 32px rgba(255, 255, 255, 0.2);
     opacity: 0.8;
   }
   50% {
-    box-shadow: 0 0 48px 16px #a21caf, 0 0 80px 32px #ec4899, 0 0 24px 8px #6366f1;
+    box-shadow: 0 0 48px 16px rgba(255, 255, 255, 0.8), 0 0 80px 32px rgba(255, 255, 255, 0.5), 0 0 24px 8px rgba(255, 255, 255, 0.7);
     opacity: 1;
   }
   100% {
-    box-shadow: 0 0 24px 8px #6366f1, 0 0 48px 16px #a21caf, 0 0 80px 32px #ec4899;
+    box-shadow: 0 0 24px 8px rgba(255, 255, 255, 0.6), 0 0 48px 16px rgba(255, 255, 255, 0.4), 0 0 80px 32px rgba(255, 255, 255, 0.2);
     opacity: 0.8;
   }
 }
 .animate-glow-border {
-  box-shadow: 0 0 24px 8px #6366f1, 0 0 48px 16px #a21caf, 0 0 80px 32px #ec4899;
+  box-shadow: 0 0 24px 8px rgba(255, 255, 255, 0.6), 0 0 48px 16px rgba(255, 255, 255, 0.4), 0 0 80px 32px rgba(255, 255, 255, 0.2);
   animation: glow-border 2.5s linear infinite;
   border-radius: 9999px;
   width: 100%;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Waves } from './components/ui/Waves';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TracingBeam } from './components/TracingBeam';
@@ -65,7 +65,7 @@ function App() {
       </div>
 
       {/* Global styles for smooth interactions */}
-      <style jsx global>{`
+      <style>{`
         html {
           scroll-behavior: smooth;
           overflow-x: hidden;

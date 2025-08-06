@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Database, Brain, Zap, Sparkles } from 'lucide-react';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -8,25 +7,11 @@ interface LoadingScreenProps {
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [currentPhase, setCurrentPhase] = useState(0);
-
-  const phases = [
-    { icon: <Code size={32} />, text: 'Loading Frontend Skills...', color: 'from-blue-500 to-cyan-500' },
-    { icon: <Database size={32} />, text: 'Initializing Backend...', color: 'from-green-500 to-emerald-500' },
-    { icon: <Brain size={32} />, text: 'Activating AI Systems...', color: 'from-purple-500 to-pink-500' },
-    { icon: <Zap size={32} />, text: 'Finalizing Portfolio...', color: 'from-orange-500 to-red-500' }
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
         const newProgress = prev + 2;
-        
-        // Update phase based on progress
-        const phaseIndex = Math.floor(newProgress / 25);
-        if (phaseIndex !== currentPhase && phaseIndex < phases.length) {
-          setCurrentPhase(phaseIndex);
-        }
         
         if (newProgress >= 100) {
           clearInterval(interval);
@@ -38,111 +23,77 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [currentPhase, onLoadingComplete]);
+  }, [onLoadingComplete]);
 
   return (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-slate-900 to-black"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black"
       >
-        {/* Animated background particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                y: [-20, -100, -20],
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.2,
-                ease: "easeInOut"
-              }}
-              className="absolute"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-            >
-              <Sparkles size={16} className="text-blue-400" />
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="relative z-10 text-center">
-          {/* Logo */}
+        <div className="text-center">
+          {/* Profile Picture with Animation */}
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 1, type: "spring", stiffness: 200 }}
-            className="mb-8"
+            initial={{ scale: 0, rotate: -180, opacity: 0 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="mb-8 relative"
           >
-            <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              KAVIN B
+            <div className="w-24 h-24 mx-auto relative">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 rounded-full border-2 border-white/20 border-t-white"
+              />
+              <img 
+                src="/WhatsApp Image 2025-07-07 at 14.25.56_574ece33.jpg" 
+                alt="Kavin B"
+                className="w-20 h-20 rounded-full object-cover absolute top-2 left-2 border-2 border-white/30"
+              />
             </div>
           </motion.div>
 
-          {/* Current Phase Icon */}
+          {/* Logo Text */}
           <motion.div
-            key={currentPhase}
-            initial={{ scale: 0, rotate: -90 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className={`mb-6 mx-auto w-16 h-16 rounded-full bg-gradient-to-r ${phases[currentPhase]?.color} flex items-center justify-center text-white shadow-lg`}
-          >
-            {phases[currentPhase]?.icon}
-          </motion.div>
-
-          {/* Phase Text */}
-          <motion.p
-            key={currentPhase}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-white/80 mb-8 text-lg"
+            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+            className="mb-8"
           >
-            {phases[currentPhase]?.text}
-          </motion.p>
+            <div className="text-4xl font-bold text-white tracking-wider">
+              KAVIN B
+            </div>
+            <div className="text-white/60 text-sm mt-2 tracking-widest">
+              PORTFOLIO
+            </div>
+          </motion.div>
 
           {/* Progress Bar */}
-          <div className="w-80 mx-auto">
-            <div className="flex justify-between text-sm text-white/60 mb-2">
-              <span>Loading...</span>
-              <span>{progress}%</span>
-            </div>
-            
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: 256 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="mx-auto"
+          >
+            <div className="h-1 bg-white/20 rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className={`h-full bg-gradient-to-r ${phases[currentPhase]?.color} rounded-full relative overflow-hidden`}
-              >
-                <motion.div
-                  animate={{ x: [-100, 300] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 bg-white/30 rounded-full blur-sm"
-                  style={{ width: '100px' }}
-                />
-              </motion.div>
+                className="h-full bg-white rounded-full"
+              />
             </div>
-          </div>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="text-white/50 mt-6 text-sm"
-          >
-            AI & Data Science Enthusiast | Full Stack Developer
-          </motion.p>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              className="text-white/40 text-xs mt-2 text-center"
+            >
+              {Math.round(progress)}%
+            </motion.div>
+          </motion.div>
         </div>
       </motion.div>
     </AnimatePresence>

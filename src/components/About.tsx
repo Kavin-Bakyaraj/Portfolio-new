@@ -56,7 +56,7 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
     { icon: <Award size={20} />, text: 'ARP Awards 2025 Nominee' },
     { icon: <Target size={20} />, text: 'Hackathon Winner at SNS iHub' },
     { icon: <BookOpen size={20} />, text: '7 Professional Certifications' },
-    { icon: <Code size={20} />, text: '15+ Projects Completed' }
+    { icon: <Code size={20} />, text: '7+ Projects Completed' }
   ];
 
   return (

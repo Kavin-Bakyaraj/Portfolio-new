@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-// import { Waves } from './ui/Waves';
+import React, { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { gsap } from 'gsap';
-import { Code, Database, Brain, Zap, Award, TrendingUp, Star, Trophy, Sparkles, Crown, Target, Rocket } from 'lucide-react';
+import { Code, Database, Brain, Zap, Award, TrendingUp } from 'lucide-react';
 import { AnimatedTooltip } from './AnimatedTooltip';
 
 interface SkillsProps {
@@ -12,75 +10,12 @@ interface SkillsProps {
 const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const skillBarsRef = useRef<HTMLDivElement>(null);
-  const [progressAnimated, setProgressAnimated] = useState(false);
 
   useEffect(() => {
     if (isInView) {
       setCurrentSection('skills');
     }
   }, [isInView, setCurrentSection]);
-
-  useEffect(() => {
-    if (isInView && !progressAnimated && skillBarsRef.current) {
-      setProgressAnimated(true);
-      
-      const timeline = gsap.timeline();
-      
-      const skillBars = skillBarsRef.current.querySelectorAll('.skill-progress-container');
-      
-      skillBars.forEach((container: any, index) => {
-        const background = container.querySelector('.skill-bar-bg');
-        const fill = container.querySelector('.skill-bar-fill');
-        const percentage = container.dataset.percentage;
-        
-        if (background && fill && percentage) {
-          timeline.fromTo(background, 
-            { scaleX: 0, opacity: 0.3 },
-            { 
-              scaleX: 1,
-              opacity: 1,
-              duration: 0.6,
-              ease: "easeOut",
-              transformOrigin: "left center"
-            },
-            index * 0.1
-          );
-          
-          timeline.fromTo(fill, 
-            { width: "0%" },
-            { 
-              width: `${percentage}%`,
-              duration: 1.5,
-              ease: "easeOut"
-            },
-            index * 0.1 + 0.3
-          );
-        }
-      });
-
-      const skillCards = skillBarsRef.current.querySelectorAll('.skill-card');
-      skillCards.forEach((card: any, index) => {
-        timeline.fromTo(card,
-          { 
-            rotationY: -90,
-            opacity: 0,
-            z: -100,
-            scale: 0.8
-          },
-          {
-            rotationY: 0,
-            opacity: 1,
-            z: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)"
-          },
-          index * 0.2
-        );
-      });
-    }
-  }, [isInView, progressAnimated]);
 
   // Skills data based on resume
   const frontendSkills = [
@@ -117,78 +52,21 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
     { id: 23, name: "n8n", designation: "Automation", image: "https://n8n.io/favicon.ico" }
   ];
 
-  const skillCategories = [
-    {
-      title: 'Frontend Development',
-      icon: <Code size={32} />,
-      color: 'from-blue-500 to-cyan-500',
-      bgGlow: 'shadow-blue-500/20',
-      skills: [
-        { name: 'React.js', level: 90, experience: '2+ years' },
-        { name: 'TypeScript', level: 85, experience: '1.5+ years' },
-        { name: 'JavaScript', level: 95, experience: '3+ years' },
-        { name: 'HTML/CSS', level: 90, experience: '3+ years' },
-        { name: 'Tailwind CSS', level: 88, experience: '2+ years' }
-      ]
-    },
-    {
-      title: 'Backend Development',
-      icon: <Database size={32} />,
-      color: 'from-green-500 to-emerald-500',
-      bgGlow: 'shadow-green-500/20',
-      skills: [
-        { name: 'Python', level: 95, experience: '3+ years' },
-        { name: 'Django', level: 85, experience: '2+ years' },
-        { name: 'SQL', level: 88, experience: '2+ years' },
-        { name: 'MongoDB', level: 80, experience: '1+ years' },
-        { name: 'REST API', level: 90, experience: '2+ years' }
-      ]
-    },
-    {
-      title: 'AI & Machine Learning',
-      icon: <Brain size={32} />,
-      color: 'from-purple-500 to-pink-500',
-      bgGlow: 'shadow-purple-500/20',
-      skills: [
-        { name: 'Langchain', level: 88, experience: '1+ years' },
-        { name: 'Gemini API', level: 85, experience: '1+ years' },
-        { name: 'scikit-learn', level: 82, experience: '1.5+ years' },
-        { name: 'Pandas/NumPy', level: 90, experience: '2+ years' },
-        { name: 'OpenCV', level: 75, experience: '1+ years' }
-      ]
-    },
-    {
-      title: 'Tools & Technologies',
-      icon: <Zap size={32} />,
-      color: 'from-orange-500 to-red-500',
-      bgGlow: 'shadow-orange-500/20',
-      skills: [
-        { name: 'Git/GitHub', level: 92, experience: '3+ years' },
-        { name: 'n8n', level: 85, experience: '1+ years' },
-        { name: 'Postman', level: 88, experience: '2+ years' },
-        { name: 'Streamlit', level: 80, experience: '1+ years' },
-        { name: 'Blender 3D', level: 70, experience: '1+ years' }
-      ]
-    }
-  ];
-
   const achievements = [
-    
     { 
       icon: <Award size={24} />, 
       title: 'ARP Awards 2025', 
       subtitle: 'Nominee',
-      color: 'from-yellow-500 to-orange-500',
-      glow: 'shadow-yellow-500/30'
+      color: 'from-blue-500 to-blue-600',
+      glow: 'shadow-blue-500/20'
     },
     { 
       icon: <TrendingUp size={24} />, 
       title: '7+ Projects', 
       subtitle: 'Completed',
-      color: 'from-green-500 to-emerald-500',
-      glow: 'shadow-green-500/30'
+      color: 'from-green-500 to-green-600',
+      glow: 'shadow-green-500/20'
     },
-
   ];
 
   return (
@@ -196,9 +74,9 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
       {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="max-w-7xl mx-auto"
         >
           {/* Section Header */}
@@ -206,7 +84,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
               className="text-5xl md:text-6xl font-bold mb-6 text-white"
             >
               Skills & Expertise
@@ -215,92 +93,52 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
             <motion.div
               initial={{ width: 0 }}
               animate={isInView ? { width: 120 } : {}}
-              transition={{ delay: 0.4, duration: 0.8 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
               className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6 shadow-lg shadow-blue-500/50"
             />
             
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
               className="text-xl text-white/70 max-w-2xl mx-auto"
             >
               Technologies and tools I work with to bring ideas to life
             </motion.p>
           </div>
 
-          {/* Gamified Achievements */}
+          {/* Achievements Section */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.8 }}
-            className="flex flex-wrap justify-center items-center gap-6 mb-16"
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex justify-center items-center gap-8 mb-16"
           >
             {achievements.map((achievement, index) => (
               <motion.div
                 key={achievement.title}
-                initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                animate={isInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
-                transition={{ delay: 1 + index * 0.2, type: "spring", stiffness: 200 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  rotateY: 5,
-                  z: 50,
-                  transition: { duration: 0.3 }
-                }}
-                className={`skill-card bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-gray-700/50 transition-all duration-500 shadow-2xl ${achievement.glow} hover:shadow-3xl relative overflow-hidden w-80 min-h-[220px] mx-4`}
-                style={{ transformStyle: 'preserve-3d' }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
+                whileHover={{ scale: 1.02 }}
+                className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-200 shadow-xl ${achievement.glow} w-64 h-32 flex flex-col items-center justify-center`}
               >
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      animate={{
-                        y: [-10, -30, -10],
-                        opacity: [0, 1, 0],
-                        scale: [0, 1, 0]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: "easeInOut"
-                      }}
-                      className="absolute"
-                      style={{
-                        top: `${20 + Math.random() * 60}%`,
-                        left: `${20 + Math.random() * 60}%`,
-                      }}
-                    >
-                      <Sparkles size={12} className="text-yellow-400" />
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className={`text-white mb-4 flex justify-center p-3 rounded-full bg-gradient-to-r ${achievement.color} shadow-lg`}>
+                <div className={`text-white mb-3 flex justify-center p-2 rounded-lg bg-gradient-to-r ${achievement.color}`}>
                   {achievement.icon}
                 </div>
-                <div className="flex flex-col items-center justify-center w-full">
-                  <h3 className="text-xl font-bold text-white mb-2 text-center w-full">{achievement.title}</h3>
-                  <p className="text-white/60 text-center w-full">{achievement.subtitle}</p>
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-1">{achievement.title}</h3>
+                  <p className="text-white/60 text-sm">{achievement.subtitle}</p>
                 </div>
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 1.5 + index * 0.2, type: "spring" }}
-                  className="absolute top-2 right-2"
-                >
-                  <Star size={16} className="text-yellow-400 fill-current" />
-                </motion.div>
               </motion.div>
             ))}
           </motion.div>
 
           {/* Skills Icons Section */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 1.2 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
             className="space-y-12"
           >
             {/* Frontend Skills */}
@@ -308,7 +146,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 1.4 }}
+                transition={{ delay: 0.7, duration: 0.4 }}
                 className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
               >
                 <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg">
@@ -317,9 +155,9 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
                 Frontend Development
               </motion.h3>
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 1.6 }}
+                transition={{ delay: 0.8, duration: 0.4 }}
               >
                 <AnimatedTooltip items={frontendSkills} />
               </motion.div>
@@ -330,7 +168,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 1.8 }}
+                transition={{ delay: 0.9, duration: 0.4 }}
                 className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
               >
                 <div className="p-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg">
@@ -339,9 +177,9 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
                 Backend Development
               </motion.h3>
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 2 }}
+                transition={{ delay: 1.0, duration: 0.4 }}
               >
                 <AnimatedTooltip items={backendSkills} />
               </motion.div>
@@ -352,7 +190,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 2.2 }}
+                transition={{ delay: 1.1, duration: 0.4 }}
                 className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
               >
                 <div className="p-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg">
@@ -361,9 +199,9 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
                 AI & Machine Learning
               </motion.h3>
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 2.4 }}
+                transition={{ delay: 1.2, duration: 0.4 }}
               >
                 <AnimatedTooltip items={aiSkills} />
               </motion.div>
@@ -374,7 +212,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 2.6 }}
+                transition={{ delay: 1.3, duration: 0.4 }}
                 className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3"
               >
                 <div className="p-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg">
@@ -383,9 +221,9 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
                 Tools & Technologies
               </motion.h3>
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 2.8 }}
+                transition={{ delay: 1.4, duration: 0.4 }}
               >
                 <AnimatedTooltip items={toolsSkills} />
               </motion.div>

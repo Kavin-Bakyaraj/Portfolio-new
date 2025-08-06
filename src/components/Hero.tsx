@@ -187,7 +187,7 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
                 <img 
                   src="/WhatsApp Image 2025-07-07 at 14.25.56_574ece33.jpg" 
                   alt="Kavin B - Profile Picture"
-                  className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full object-cover border-4 border-blue-500 shadow-xl bg-black"
+                  className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full object-cover border-4 border-white shadow-xl bg-black"
                 />
               </div>
             </div>
