@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Boxes } from './Certifications';
+// import { Waves } from './ui/Waves';
 import { motion, useInView } from 'framer-motion';
 import { Download, Award, Code, Database, Brain, Zap, BookOpen, Target } from 'lucide-react';
 
@@ -61,7 +61,7 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="about" ref={ref} className="py-20 relative overflow-hidden">
-      <Boxes className="z-0" />
+      {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -131,7 +131,7 @@ const About: React.FC<AboutProps> = ({ setCurrentSection }) => {
                 </div>
                 
                 <motion.a
-                  href="/KAVIN B ATS Resume.pdf"
+                  href="public/Ats Resume.pdf"
                   download
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}

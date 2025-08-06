@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { Boxes } from './Certifications';
+// import { Waves } from './ui/Waves';
 import { motion } from 'framer-motion';
 import { useSpring, animated } from '@react-spring/web';
 import { ChevronDown, Github, Linkedin, Mail, MapPin, Globe } from 'lucide-react';
 import { LinkPreview } from "./ui/link-preview";
 import { MovingBorder } from "./MovingBorder";
+import { useInView } from 'framer-motion';
 
 interface HeroProps {
   setCurrentSection: (section: string) => void;
@@ -12,6 +13,8 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   // Animated counter for stats
   const statsAnimation = useSpring({
@@ -121,12 +124,11 @@ const Hero: React.FC<HeroProps> = ({ setCurrentSection }) => {
     { icon: <Mail size={20} />, href: 'mailto:kavinbakyaraj47@gmail.com', label: 'Email', preview: false },
     { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/kavin-b-/', label: 'LinkedIn', preview: true },
     { icon: <Github size={20} />, href: 'https://github.com/Kavin-Bakyaraj', label: 'GitHub', preview: true },
-
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <Boxes className="z-0" />
+    <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Waves background is now global */}
       {/* Particle background */}
       <canvas
         ref={canvasRef}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Label } from './ui/Label';
 import { Input } from './ui/Input';
 import emailjs from 'emailjs-com';
-import { Boxes } from './Certifications';
+// import { Waves } from './ui/Waves';
 import { motion, useInView } from 'framer-motion';
 import { useSpring, animated } from '@react-spring/web';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, CheckCircle, AlertCircle } from 'lucide-react';
@@ -144,7 +144,7 @@ const Contact: React.FC<ContactProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="contact" ref={ref} className="py-20 relative overflow-hidden">
-      <Boxes className="z-0" />
+      {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

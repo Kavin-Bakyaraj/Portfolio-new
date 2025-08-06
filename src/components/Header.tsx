@@ -112,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({ currentSection, setCurrentSection }) =>
             <div className="flex items-center space-x-4">
               {/* Resume download */}
               <motion.a
-                href="/KAVIN B ATS Resume.pdf"
+                href="public/Ats Resume.pdf"
                 download
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

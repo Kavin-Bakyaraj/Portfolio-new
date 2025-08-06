@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Waves } from './components/ui/Waves';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -38,39 +39,9 @@ function App() {
         {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       </AnimatePresence>
 
-      {/* Background with gradient overlay */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 transition-all duration-1000 bg-gradient-to-br from-gray-900 via-slate-900 to-black" />
-        
-        {/* Animated background pattern */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
-        </div>
-        
-        {/* Floating geometric shapes */}
-        <motion.div
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl"
-        />
-        
-        <motion.div
-          animate={{
-            rotate: -360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-xl"
-        />
+      {/* Global Waves background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <Waves className="w-full h-full" />
       </div>
 
       <div ref={scrollContainerRef} className="relative z-10">

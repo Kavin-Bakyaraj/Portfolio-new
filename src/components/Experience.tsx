@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Boxes } from './Certifications';
+// import { Waves } from './ui/Waves';
 import { motion, useInView } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, ChevronRight, Building, Users, Award } from 'lucide-react';
 
@@ -70,7 +70,7 @@ const Experience: React.FC<ExperienceProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="experience" ref={ref} className="py-20 relative overflow-hidden">
-      <Boxes className="z-0" />
+      {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

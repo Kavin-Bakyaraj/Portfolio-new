@@ -1,10 +1,9 @@
-
-
 "use client";
 import React, { useRef, useState } from "react";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+// import { Waves } from './ui/Waves';
 // Animated Boxes background
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
   const rows = new Array(150).fill(1);
@@ -161,6 +160,8 @@ const certificates = [
 const Certifications: React.FC = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
   const cardRefs = certificates.map(() => useRef<HTMLDivElement>(null));
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   // Close expanded card on outside click
   cardRefs.forEach((ref, idx) => {
@@ -170,8 +171,8 @@ const Certifications: React.FC = () => {
   });
 
   return (
-    <section id="certifications" className="relative py-24 min-h-screen overflow-hidden">
-      <Boxes className="z-0" />
+    <section id="certifications" ref={ref} className="relative py-24 min-h-screen overflow-hidden">
+      {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
           Certifications

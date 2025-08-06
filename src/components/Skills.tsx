@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Boxes } from './Certifications';
+// import { Waves } from './ui/Waves';
 import { motion, useInView } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Code, Database, Brain, Zap, Award, TrendingUp, Star, Trophy, Sparkles, Crown, Target, Rocket } from 'lucide-react';
@@ -100,7 +100,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
   ];
 
   const aiSkills = [
-    { id: 12, name: "Langchain", designation: "LLM Framework", image: "https://python.langchain.com/img/brand/wordmark.png" },
+    { id: 12, name: "Langchain", designation: "LLM Framework", image: "https://uploads-ssl.webflow.com/65ff950538088944d66126b3/662ef3209b872e92e41212f6_cookieicon.png" },
     { id: 13, name: "Gemini API", designation: "AI API", image: "https://seeklogo.com/images/G/google-gemini-logo-A5787B2669-seeklogo.com.png" },
     { id: 14, name: "scikit-learn", designation: "ML Library", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" },
     { id: 15, name: "Pandas", designation: "Data Analysis", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
@@ -110,7 +110,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
 
   const toolsSkills = [
     { id: 18, name: "Git", designation: "Version Control", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-    { id: 19, name: "GitHub", designation: "Code Repository", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+    { id: 19, name: "GitHub", designation: "Code Repository", image: "https://www.svgrepo.com/show/475654/github-color.svg" },
     { id: 20, name: "Postman", designation: "API Testing", image: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" },
     { id: 21, name: "Streamlit", designation: "App Framework", image: "https://streamlit.io/images/brand/streamlit-mark-color.png" },
     { id: 22, name: "Blender", designation: "3D Modeling", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
@@ -183,7 +183,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
     },
     { 
       icon: <TrendingUp size={24} />, 
-      title: '15+ Projects', 
+      title: '7+ Projects', 
       subtitle: 'Completed',
       color: 'from-green-500 to-emerald-500',
       glow: 'shadow-green-500/30'
@@ -193,7 +193,7 @@ const Skills: React.FC<SkillsProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="skills" ref={ref} className="py-20 relative overflow-hidden">
-      <Boxes className="z-0" />
+      {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

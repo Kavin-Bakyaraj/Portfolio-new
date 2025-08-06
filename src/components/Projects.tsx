@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Boxes } from './Certifications';
+// import { Waves } from './ui/Waves';
 import { motion, useInView } from 'framer-motion';
 import { HoverEffect } from './ui/HoverEffect';
 import { ExternalLink, Github, Code, Database, Brain, Globe } from 'lucide-react';
@@ -175,7 +175,7 @@ const Projects: React.FC<ProjectsProps> = ({ setCurrentSection }) => {
 
   return (
     <section id="projects" ref={ref} className="py-20 relative overflow-hidden">
-      <Boxes className="z-0" />
+      {/* Waves background is now global */}
       <div className="relative z-10 container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
